@@ -19,7 +19,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const botName = 'TechChat Bot';
 
-// Run when client connects
+// Run when user connects
 io.on('connection', socket => {
   socket.on('joinRoom', ({ username, room }) => {
     const user = userJoin(socket.id, username, room);
@@ -51,7 +51,7 @@ io.on('connection', socket => {
     io.to(user.room).emit('message', formatMessage(user.username, msg));
   });
 
-  // Runs when client disconnects
+  // Runs when user disconnects
   socket.on('disconnect', () => {
     const user = userLeave(socket.id);
 
